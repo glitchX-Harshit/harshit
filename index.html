@@ -6,142 +6,53 @@
     <title>Portfolio V2 | Matter & Motion</title>
     
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 </head>
-<body class="transition-colors duration-[1000ms] ease-linear">
-
-    <div class="cursor-dot"></div>
-    <div class="cursor-circle"></div>
-    <div class="noise"></div>
-
-    <div class="fixed inset-0 bg-[#111] z-[1000] flex flex-col justify-between p-8 text-white" id="loader">
-        <div class="flex justify-between w-full uppercase text-xs tracking-widest">
-            <span>Loading Experience</span>
-            <span>V2.0</span>
+<body>
+    <nav>
+        <div class="nav-logo">
+            <a href="#">Harshit Chaudhary</a>
         </div>
-        <div class="text-[15vw] leading-none brand-font" id="loader-count">00</div>
-        <div class="w-full h-[1px] bg-white/20 relative overflow-hidden">
-            <div class="absolute top-0 left-0 h-full bg-white w-0" id="loader-bar"></div>
+        <div class="nav-items">
+            <a href="#">Runway</a>
+            <a href="#">LookBook</a>
+            <a href="#">Campaigns</a>
+            <a href="#">Biography</a>
         </div>
-    </div>
+    </nav>
 
-    <main id="main-content">
-
-        <section class="section min-h-screen flex flex-col justify-end pb-24 px-6 md:px-12 relative" data-bgcolor="#f2f2f2" data-textcolor="#111111">
-            <div class="absolute top-12 left-6 md:left-12 text-sm uppercase tracking-widest opacity-60">
-                Design Engineer<br>EST. 2012
-            </div>
-            
-            <div class="reveal-text">
-                <h1 class="text-[13vw] leading-[0.85] uppercase tracking-tight split-text">Digital</h1>
-            </div>
-            <div class="reveal-text flex items-center gap-8">
-                <div class="w-24 h-24 rounded-full border border-black/20 flex items-center justify-center text-xs animate-spin-slow mt-4 hidden md:flex">
-                    SCROLL
-                </div>
-                <h1 class="text-[13vw] leading-[0.85] uppercase tracking-tight ml-[10vw] split-text">Alchemist</h1>
-            </div>
-        </section>
-
-        <section class="section py-32 px-6 md:px-12" data-bgcolor="#e8e8e5" data-textcolor="#111111">
-            <div class="container mx-auto grid grid-cols-1 md:grid-cols-12 gap-12">
-                <div class="md:col-span-4">
-                    <span class="block w-3 h-3 bg-black mb-4"></span>
-                    <p class="uppercase tracking-widest text-xs">The Philosophy</p>
-                </div>
-                <div class="md:col-span-8">
-                    <p class="text-3xl md:text-5xl leading-[1.2] indent-24">
-                        I build digital products that feel inevitable. Combining <span class="italic font-serif">rigid engineering</span> with <span class="italic font-serif">fluid aesthetics</span>, I ensure your users don't just visit your site—they <span class="border-b border-black">live in it.</span>
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section class="section py-24 bg-[#111] text-white" data-bgcolor="#0a0a0a" data-textcolor="#ffffff">
-            <div class="px-6 md:px-12 mb-24 flex items-end justify-between">
-                <h2 class="text-7xl brand-font">Selected<br>Works</h2>
-                <span class="text-sm opacity-50">(2023 - 2025)</span>
+    <section class="hero">
+        <div class="hero-overlay">
+            <div class="counter">
+                <h1>0</h1>
             </div>
 
-            <div class="border-t border-white/20">
-                <div class="work-item group relative py-16 px-6 md:px-12 border-b border-white/20 flex justify-between items-center cursor-pointer overflow-hidden">
-                    <div class="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out z-0"></div>
-                    <h3 class="relative z-10 text-5xl md:text-7xl group-hover:text-black transition-colors duration-300">Vogue Japan</h3>
-                    <span class="relative z-10 text-sm group-hover:text-black uppercase tracking-widest">Web GL / Direction</span>
-                </div>
-                 <div class="work-item group relative py-16 px-6 md:px-12 border-b border-white/20 flex justify-between items-center cursor-pointer overflow-hidden">
-                    <div class="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out z-0"></div>
-                    <h3 class="relative z-10 text-5xl md:text-7xl group-hover:text-black transition-colors duration-300">Off-White™</h3>
-                    <span class="relative z-10 text-sm group-hover:text-black uppercase tracking-widest">E-Commerce</span>
-                </div>
-                 <div class="work-item group relative py-16 px-6 md:px-12 border-b border-white/20 flex justify-between items-center cursor-pointer overflow-hidden">
-                    <div class="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out z-0"></div>
-                    <h3 class="relative z-10 text-5xl md:text-7xl group-hover:text-black transition-colors duration-300">Porsche</h3>
-                    <span class="relative z-10 text-sm group-hover:text-black uppercase tracking-widest">Interaction</span>
+            <div class="overlay-text-container">
+                <div class="overlay-text">
+                    <p>Structure</p>
+                    <p>Designed Identity</p>
+                    <p>Welcome</p>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="section min-h-screen py-32 px-6 md:px-12" data-bgcolor="#e0e5ec" data-textcolor="#000000">
-             <div class="grid grid-cols-1 md:grid-cols-2 gap-24 h-full">
-                <div class="sticky top-32 self-start">
-                    <h2 class="text-8xl brand-font mb-8">Capabilities</h2>
-                    <p class="text-xl max-w-md opacity-70">A full-stack approach to design. From the first pixel to the final deploy.</p>
-                </div>
-                <div class="space-y-24 pt-12">
-                    <div>
-                        <h4 class="text-xs uppercase tracking-widest mb-4 border-b border-black pb-2">01 — Strategy</h4>
-                        <p class="text-4xl">Brand Identity, Art Direction, UX Research, Technical Consulting</p>
-                    </div>
-                    <div>
-                        <h4 class="text-xs uppercase tracking-widest mb-4 border-b border-black pb-2">02 — Design</h4>
-                        <p class="text-4xl">UI/UX, 3D Motion, Creative Coding, Interaction Design</p>
-                    </div>
-                    <div>
-                        <h4 class="text-xs uppercase tracking-widest mb-4 border-b border-black pb-2">03 — Engineering</h4>
-                        <p class="text-4xl">WebGL (Three.js), React/Next.js, GSAP Animation, GLSL Shaders</p>
-                    </div>
-                </div>
-             </div>
-        </section>
+        <div class="hero-images">
+            <div class="img"><img src="my.png" alt=""></div>
+            <div class="img"><img src="my.png" alt=""></div>
+            <div class="img hero-img"><img src="my.png" alt=""></div>
+            <div class="img"><img src="my.png" alt=""></div>
+            <div class="img"><img src="my.png" alt=""></div>
+        </div>
 
-        <section class="py-24 bg-black text-white overflow-hidden" data-bgcolor="#000000" data-textcolor="#ffffff">
-            <div class="marquee-container">
-                <div class="marquee-content text-[8vw] brand-font uppercase leading-none">
-                    <span>Interaction • Immersion • Impact • Interaction • Immersion • Impact •</span>
-                    <span>Interaction • Immersion • Impact • Interaction • Immersion • Impact •</span>
-                </div>
-            </div>
-        </section>
+        <div class="hero-header">
+            <h1>Harshit Chaudhary</h1>
+        </div>
+    </section>
 
-        <section class="section min-h-[80vh] flex flex-col pt-24" data-bgcolor="#dbd6d0" data-textcolor="#000000">
-            <div class="px-6 md:px-12 mb-8">
-                <h2 class="text-[10vw] leading-[0.8] uppercase brand-font mb-4 text-center">Let's Connect</h2>
-                <p class="text-center text-lg uppercase tracking-widest">Drop me a line below (Literally)</p>
-            </div>
-            
-            <div class="flex-grow relative border-t-2 border-black border-b-2 overflow-hidden" id="gravity-wrapper" style="min-height: 500px;">
-                <canvas id="gravity-canvas"></canvas>
-                <div class="absolute inset-0 pointer-events-none flex items-center justify-center opacity-5">
-                    <h3 class="text-[15vw] font-bold brand-font">GRAB & PLAY</h3>
-                </div>
-                <!-- Contact Pills (synced with physics) -->
-                <div id="contact-pills-container"></div>
-            </div>
+    <section style="height: 100vh;" class="content">
 
-            <div class="py-8 px-6 md:px-12 flex justify-between text-xs uppercase tracking-widest">
-                <span>© 2024 Design Engineer</span>
-                <span>Tokyo, Japan</span>
-            </div>
-        </section>
+    </section>
 
-    </main>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
