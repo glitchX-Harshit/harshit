@@ -1,7 +1,8 @@
 import gsap from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/index.js";
 import { CustomEase } from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/CustomEase.js";
+import { ScrollTrigger } from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/ScrollTrigger.js";
 
-gsap.registerPlugin(CustomEase);
+gsap.registerPlugin(CustomEase, ScrollTrigger);
 CustomEase.create("hop", "0.85, 0, 0.15, 1");
 
 const counterProgress = document.querySelector(".counter h1");
@@ -24,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const overlayTextTl = gsap.timeline({ delay: 0.75 });
     const revealTl = gsap.timeline({ delay: 0.5 });
 
-    counterTl.to(counter, { 
+    counterTl.to(counter, {
         value: 100,
         duration: 5,
         ease: "power2.out",
@@ -99,28 +100,153 @@ document.addEventListener("DOMContentLoaded", () => {
             stagger: 0.1,
             ease: "power3.out",
         },
-         "-=0.5"
+            "-=0.5"
         );
 
     // Initialize Lenis with increased sensitivity
     const lenis = new Lenis({
         duration: 5,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        // smoothWheel: true,
-        // wheelMultiplier: 2,
-        // touchMultiplier: 2.5,
-        // infinite: false,
     });
 
-    // Lenis scroll event
-    // lenis.on('scroll', (e) => {
-    //     console.log(e);
-    // });
+    // Integrate Lenis with GSAP ScrollTrigger
+    lenis.on('scroll', ScrollTrigger.update);
 
-    // Integrate Lenis with animation frame
-    function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
+    gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+    });
+
+    gsap.ticker.lagSmoothing(0);
 });
+
+// MARQUEE COMPONENT - FIXED VERSION
+(function () {
+    const component = document.querySelector('.marquee-component');
+
+    if (component) {
+        const heroLines = component.querySelectorAll('.marquee-component__line');
+
+        // Split text animation
+        heroLines.forEach((line) => {
+            const text = line.textContent;
+            const words = text.split(' ');
+            line.innerHTML = '';
+
+            words.forEach((word, i) => {
+                const wordSpan = document.createElement('span');
+                wordSpan.className = 'marquee-component__word';
+                wordSpan.textContent = word;
+                line.appendChild(wordSpan);
+
+                if (i < words.length - 1) {
+                    line.appendChild(document.createTextNode(' '));
+                }
+            });
+        });
+
+        const allWords = component.querySelectorAll('.marquee-component__word');
+
+        gsap.to(allWords, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.03,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: component,
+                start: 'top 60%',
+                end: 'bottom 60%',
+                toggleActions: 'play none none reverse'
+            }
+        });
+
+        // Marquee animation - FIXED SYNCHRONIZATION
+        const m1 = component.querySelector('[data-marquee="1"]');
+        const m2 = component.querySelector('[data-marquee="2"]');
+
+        if (m1 && m2) {
+            let lastScroll = 0;
+            let m1Pos = 0;
+            let m2Pos = 0;
+            let speed = 0;
+            let direction = 1;
+
+            const m1Width = m1.scrollWidth / 2;
+            const m2Width = m2.scrollWidth / 2;
+
+            function update() {
+                m1Pos += speed * direction;
+                m2Pos -= speed * direction;
+
+                // Fixed synchronization logic using modulo
+                if (Math.abs(m1Pos) >= m1Width) {
+                    m1Pos = m1Pos % m1Width;
+                } else if (m1Pos > 0) {
+                    m1Pos = -(m1Width - (m1Pos % m1Width));
+                }
+
+                if (Math.abs(m2Pos) >= m2Width) {
+                    m2Pos = m2Pos % m2Width;
+                } else if (m2Pos > 0) {
+                    m2Pos = -(m2Width - (m2Pos % m2Width));
+                }
+
+                gsap.set(m1, { x: m1Pos });
+                gsap.set(m2, { x: m2Pos });
+
+                speed *= 0.95;
+
+                requestAnimationFrame(update);
+            }
+
+            update();
+
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                const delta = scrollY - lastScroll;
+
+                direction = delta > 0 ? 1 : -1;
+                speed = Math.min(Math.abs(delta) * 0.2, 8);
+
+                lastScroll = scrollY;
+            });
+        }
+    }
+
+    // VIDEO SCALE ANIMATION
+    const mainVideo = document.querySelector(".main-video");
+
+    if (mainVideo) {
+        gsap.set(".main-video", {
+            scale: 0.6,
+            borderRadius: "24px",
+            width: "calc(100% - 2rem)",
+            margin: "0 1rem"
+        });
+
+        gsap.set(".video-container", {
+            overflow: "hidden",
+            borderRadius: "24px"
+        });
+
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: ".main-video",
+                start: "top 80%",
+                end: "top 20%",
+                scrub: 1,
+                markers: false
+            }
+        })
+            .to(".main-video", {
+                scale: 1,
+                borderRadius: "0px",
+                ease: "none"
+            })
+            .to(".video-container", {
+                borderRadius: "0px",
+                ease: "none"
+            }, 0);
+    }
+
+})();
