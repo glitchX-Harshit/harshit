@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Oswald:wght@200..700&display=swap');
 
 :root {
     --light: #fff;
@@ -9,6 +9,12 @@
     font-family: light-weight;
     src: url(assets/fonts/PPEditorialNew-Ultralight.woff2);
 }
+
+@font-face {
+    font-family: helvetica-regular;
+    src: url(assets/fonts/HelveticaNowDisplay-Regular.woff2);
+}
+
 body::-webkit-scrollbar {
     display: none;
 }
@@ -186,7 +192,7 @@ nav {
 .marquee-component__title {
     font-size: 3.8vw;
     font-weight: 300;
-    line-height: 1.3;   
+    line-height: 1.3;
     max-width: 1600px;
     color: var(--dark);
     font-family: 'light-weight', sans-serif;
@@ -249,9 +255,10 @@ nav {
     }
 }
 
-    
+
 .main-video {
-    width: calc(100% - 2rem); /* 2rem on each side */
+    width: calc(100% - 2rem);
+    /* 2rem on each side */
     margin: 0 1rem;
     height: 100vh;
     transform-origin: center center;
@@ -267,4 +274,240 @@ nav {
     height: 100%;
     object-fit: cover;
     display: block;
+}
+
+.approach {
+    height: auto;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.approach .heading {
+    width: 100%;
+    height: 50vh;
+    margin-top: 5rem;
+}
+
+.approach .heading h1 {
+    font-size: 4rem;
+    font-weight: 100;
+    text-align: center;
+    font-family: 'light-weight', sans-serif;
+    line-height: 1;
+}
+
+
+
+.approach .approach-content {
+    width: 100%;
+    height: 100vh;
+}
+
+.approach .approach-content .leadership {
+    display: flex;
+    gap: 24vw;
+    font-family: 'Helvetica-Monospace', monospace;
+    border-top: var(--dark) 1px solid;
+    padding: 5px 1em 0 2em;
+    margin-bottom: 78px;
+}
+
+.approach .approach-content .leadership .content-heading h3 {
+    width: 24vw;
+    font-family: 'helvetica-regular', sans-serif;
+    font-size: 25px;
+    font-weight: 300;
+    text-transform: none;
+    line-height: 1.2;
+    margin-left: -18px;
+    margin-top: 10px;
+}
+
+.approach .approach-content .leadership .content-paragraph {
+    width: 60vw;
+}
+
+.approach .approach-content .leadership .content-paragraph p {
+    font-family: 'helvetica-regular', sans-serif;
+    font-size: 16.2px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-transform: none;
+    letter-spacing: -0.019em;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+
+
+.approach .approach-content .branding {
+    display: flex;
+    gap: 24vw;
+    font-family: 'Helvetica-Monospace', monospace;
+    border-top: var(--dark) 1px solid;
+    padding: 5px 1em 0 2em;
+    margin-bottom: 78px;
+}
+
+.approach .approach-content .branding .content-heading h3 {
+    width: 24vw;
+    font-family: 'helvetica-regular', sans-serif;
+    font-size: 25px;
+    font-weight: 500;
+    text-transform: none;
+    line-height: 1.2;
+    margin-left: -18px;
+    margin-top: 10px;
+}
+
+.approach .approach-content .branding .content-paragraph {
+    width: 60vw;
+}
+
+.approach .approach-content .branding .content-paragraph p {
+    font-family: 'helvetica-regular', sans-serif;
+    font-size: 16.2px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-transform: none;
+    letter-spacing: -0.019em;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+
+
+.approach .approach-content .strategy {
+    display: flex;
+    gap: 24vw;
+    font-family: 'Helvetica-Monospace', monospace;
+    border-top: var(--dark) 1px solid;
+    padding: 5px 1em 0 2em;
+    margin-bottom: 78px;
+}
+
+.approach .approach-content .strategy .content-heading h3 {
+    width: 24vw;
+    font-family: 'helvetica-regular', sans-serif;
+    font-size: 25px;
+    font-weight: 500;
+    text-transform: none;
+    line-height: 1.2;
+    margin-left: -18px;
+    margin-top: 10px;
+}
+
+.approach .approach-content .strategy .content-paragraph {
+    width: 60vw;
+}
+
+.approach .approach-content .strategy .content-paragraph p {
+    font-family: 'helvetica-regular', sans-serif;
+    font-size: 16.2px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-transform: none;
+    letter-spacing: -0.019em;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+
+
+.approach .approach-content .optimization {
+    display: flex;
+    gap: 24vw;
+    font-family: 'Helvetica-Monospace', monospace;
+    border-top: var(--dark) 1px solid;
+    padding: 5px 1em 0 2em;
+    margin-bottom: 78px;
+}
+
+.approach .approach-content .optimization .content-heading h3 {
+    width: 24vw;
+    font-family: 'helvetica-regular', sans-serif;
+    font-size: 25px;
+    font-weight: 500;
+    text-transform: none;
+    line-height: 1.2;
+    margin-left: -18px;
+    margin-top: 10px;
+}
+
+.approach .approach-content .optimization .content-paragraph {
+    width: 60vw;
+}
+
+.approach .approach-content .optimization .content-paragraph p {
+    font-family: 'helvetica-regular', sans-serif;
+    font-size: 16.2px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-transform: none;
+    letter-spacing: -0.019em;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+
+
+.approach .approach-content .communication {
+    display: flex;
+    gap: 24vw;
+    font-family: 'Helvetica-Monospace', monospace;
+    border-top: var(--dark) 1px solid;
+    padding: 5px 1em 0 2em;
+    margin-bottom: 78px;
+}
+
+.approach .approach-content .communication .content-heading h3 {
+    width: 24vw;
+    font-family: 'helvetica-regular', sans-serif;
+    font-size: 25px;
+    font-weight: 500;
+    text-transform: none;
+    line-height: 1.2;
+    margin-left: -18px;
+    margin-top: 10px;
+}
+
+.approach .approach-content .communication .content-paragraph {
+    width: 60vw;
+}
+
+.approach .approach-content .communication .content-paragraph p {
+    font-family: 'helvetica-regular', sans-serif;
+    font-size: 16.2px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-transform: none;
+    letter-spacing: -0.019em;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.approach .heading h1 {
+    overflow: visible;
+}
+
+.approach-word {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+}
+
+.approach-word-inner {
+    display: inline-block;
+    will-change: transform;
+}
+
+.marquee-component__word {
+    will-change: transform;
+}
+
+@media (max-width: 1000px) {
+    .approach .heading h1 {
+        font-size: 10vw;
+    }
 }

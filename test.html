@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crowd Canvas Component</title>
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <title>Portfolio Flip Effect</title>
     <style>
+        @font-face {
+            font-family: helvetica-hai;
+            src: url(assets/fonts/HelveticaNowDisplay-Regular.woff2);
+        }
         * {
             margin: 0;
             padding: 0;
@@ -16,298 +16,481 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            min-height: 100vh;
             background: #ffffff;
+            color: #000000;
+            font-family: 'helvetica-hai', sans-serif;
+            overflow-x: hidden;
         }
 
-        .demo-spacer {
-            height: 50vh;
+        .projects-list {
+            max-width: 1600px;
+            height: 100vh;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
-            font-size: 2rem;
-            font-weight: 300;
-            color: #ccc;
+            margin: 0 auto;
+            padding: 0 4rem;
+        }
+
+        .project-item {
+            position: relative;
+            padding: 1.5rem 0;
+            cursor: pointer;
+            overflow: hidden;
+            perspective: 2000px;
+        }
+
+        .text-content {
+            position: relative;
+            z-index: 10;
+            transform-style: preserve-3d;
+            transform-origin: center;
+        }
+
+        .text-content h2 {
+            font-size: 55px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+            font-family: 'helvetica-hai', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .images-row {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            display: flex;
+            gap: 0.5rem;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 5;
+            width: 100%;
+        }
+
+        .hover-image {
+            width: 100px;
+            height: 55px;
+            flex: none;
+            object-fit: cover;
+            border-radius: 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transform: scale(0.95) rotateY(90deg);
+            filter: grayscale(0%);
+            transition: filter 0.3s;
+        }
+
+        .hover-image:hover {
+            filter: grayscale(100%);
+        }
+
+        @media (max-width: 1024px) {
+            .hover-image {
+                height: 50px;
+            }
+
+            .images-row {
+                gap: 0.4rem;
+            }
+
+            .projects-list {
+                padding: 0 2rem;
+            }
+
+            .text-content h2 {
+                font-size: 45px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .projects-list {
+                padding: 0 1.5rem;
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .project-item {
+                padding: 1rem 0;
+            }
+
+            .hover-image {
+                height: 35px;
+            }
+
+            .images-row {
+                gap: 0.3rem;
+            }
+
+            .text-content h2 {
+                font-size: 30px;
+            }
+
+            /* Auto show images on mobile */
+            .project-item.mobile-active .images-row {
+                opacity: 1;
+            }
+
+            .project-item.mobile-active .text-content {
+                opacity: 0;
+                transform: rotateX(-90deg);
+            }
+
+            .project-item.mobile-active .hover-image {
+                transform: scale(1) rotateY(0deg);
+            }
         }
     </style>
 </head>
 <body>
-    <div class="demo-spacer">Content Above</div>
-    
-    <div id="crowd-canvas-root"></div>
+    <section style="height: 100vh;"></section>
+    <div class="projects-list">
+        <!-- Project 1 - REGRESE (4 images) -->
+        <div class="project-item">
+            <div class="text-content">
+                <h2>REGRESE</h2>
+            </div>
+            <div class="images-row">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&h=300&fit=crop" alt="Regrese 1" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?w=400&h=300&fit=crop" alt="Regrese 2" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=400&h=300&fit=crop" alt="Regrese 3" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&h=300&fit=crop" alt="Regrese 4" class="hover-image">
+            </div>
+        </div>
 
-    <div class="demo-spacer">Content Below</div>
+        <!-- Project 2 - LINOLA (3 images) -->
+        <div class="project-item">
+            <div class="text-content">
+                <h2>LINOLA</h2>
+            </div>
+            <div class="images-row">
+                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&h=300&fit=crop" alt="Linola 1" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=400&h=300&fit=crop" alt="Linola 2" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=300&fit=crop" alt="Linola 3" class="hover-image">
+            </div>
+        </div>
 
-    <script type="text/babel">
-        const { useEffect, useRef } = React;
+        <!-- Project 3 - URBIS (2 images) -->
+        <div class="project-item">
+            <div class="text-content">
+                <h2>URBIS</h2>
+            </div>
+            <div class="images-row">
+                <img src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=400&h=300&fit=crop" alt="Urbis 1" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=400&h=300&fit=crop" alt="Urbis 2" class="hover-image">
+            </div>
+        </div>
 
-        const CrowdCanvas = ({ src = 'images/image.png', rows = 15, cols = 7 }) => {
-            const canvasRef = useRef(null);
+        <!-- Project 4 - HOUSE OF SENSES (7 images) -->
+        <div class="project-item">
+            <div class="text-content">
+                <h2>HOUSE OF SENSES</h2>
+            </div>
+            <div class="images-row">
+                <img src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=400&h=300&fit=crop" alt="House of Senses 1" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=400&h=300&fit=crop" alt="House of Senses 2" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=400&h=300&fit=crop" alt="House of Senses 3" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop" alt="House of Senses 4" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=400&h=300&fit=crop" alt="House of Senses 5" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1556909212-d5b604d0c90d?w=400&h=300&fit=crop" alt="House of Senses 6" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1505691723518-36a5ac3be353?w=400&h=300&fit=crop" alt="House of Senses 7" class="hover-image">
+            </div>
+        </div>
 
-            useEffect(() => {
-                const canvas = canvasRef.current;
-                if (!canvas) return;
+        <!-- Project 5 - MEISNER BEAUTY (6 images) -->
+        <div class="project-item">
+            <div class="text-content">
+                <h2>MEISNER BEAUTY</h2>
+            </div>
+            <div class="images-row">
+                <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&h=300&fit=crop" alt="Meisner Beauty 1" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=400&h=300&fit=crop" alt="Meisner Beauty 2" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=400&h=300&fit=crop" alt="Meisner Beauty 3" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1556228841-a132a12c0b1d?w=400&h=300&fit=crop" alt="Meisner Beauty 4" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=400&h=300&fit=crop" alt="Meisner Beauty 5" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&h=300&fit=crop" alt="Meisner Beauty 6" class="hover-image">
+            </div>
+        </div>
 
-                const ctx = canvas.getContext("2d");
-                if (!ctx) return;
+        <!-- Project 6 - PEDIATRIC DERMATOLOGIST CONFERENCE (7 images) -->
+        <div class="project-item">
+            <div class="text-content">
+                <h2>PEDIATRIC DERMATOLOGIST CONFERENCE</h2>
+            </div>
+            <div class="images-row">
+                <img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=400&h=300&fit=crop" alt="Conference 1" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=300&fit=crop" alt="Conference 2" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=400&h=300&fit=crop" alt="Conference 3" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=400&h=300&fit=crop" alt="Conference 4" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop" alt="Conference 5" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=300&fit=crop" alt="Conference 6" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&h=300&fit=crop" alt="Conference 7" class="hover-image">
+            </div>
+        </div>
 
-                const config = { src, rows, cols };
+        <!-- Project 7 - BRITE HARVEST (6 images) -->
+        <div class="project-item">
+            <div class="text-content">
+                <h2>BRITE HARVEST</h2>
+            </div>
+            <div class="images-row">
+                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&h=300&fit=crop" alt="Brite Harvest 1" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&h=300&fit=crop" alt="Brite Harvest 2" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=300&fit=crop" alt="Brite Harvest 3" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400&h=300&fit=crop" alt="Brite Harvest 4" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=400&h=300&fit=crop" alt="Brite Harvest 5" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&h=300&fit=crop" alt="Brite Harvest 6" class="hover-image">
+            </div>
+        </div>
 
-                // UTILS
-                const randomRange = (min, max) => min + Math.random() * (max - min);
-                const randomIndex = (array) => randomRange(0, array.length) | 0;
-                const removeFromArray = (array, i) => array.splice(i, 1)[0];
-                const removeItemFromArray = (array, item) => removeFromArray(array, array.indexOf(item));
-                const removeRandomFromArray = (array) => removeFromArray(array, randomIndex(array));
-                const getRandomFromArray = (array) => array[randomIndex(array) | 0];
+        <!-- Project 8 - SAXX MODEL AND PRODUCTION (7 images) -->
+        <div class="project-item">
+            <div class="text-content">
+                <h2>SAXX MODEL AND PRODUCTION</h2>
+            </div>
+            <div class="images-row">
+                <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=400&h=300&fit=crop" alt="Saxx 1" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&h=300&fit=crop" alt="Saxx 2" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=400&h=300&fit=crop" alt="Saxx 3" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=400&h=300&fit=crop" alt="Saxx 4" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=300&fit=crop" alt="Saxx 5" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=300&fit=crop" alt="Saxx 6" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=400&h=300&fit=crop" alt="Saxx 7" class="hover-image">
+            </div>
+        </div>
 
-                // TWEEN FACTORIES
-                const resetPeep = ({ stage, peep }) => {
-                    const direction = Math.random() > 0.5 ? 1 : -1;
-                    const offsetY = 100 - 250 * gsap.parseEase("power2.in")(Math.random());
-                    const startY = stage.height - peep.height + offsetY;
-                    let startX, endX;
+        <!-- Project 9 - LEVEL 2 (3 images) -->
+        <div class="project-item">
+            <div class="text-content">
+                <h2>LEVEL 2</h2>
+            </div>
+            <div class="images-row">
+                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&h=300&fit=crop" alt="Level 2 1" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=400&h=300&fit=crop" alt="Level 2 2" class="hover-image">
+                <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=400&h=300&fit=crop" alt="Level 2 3" class="hover-image">
+            </div>
+        </div>
+    </div>
 
-                    if (direction === 1) {
-                        startX = -peep.width;
-                        endX = stage.width;
-                        peep.scaleX = 1;
-                    } else {
-                        startX = stage.width + peep.width;
-                        endX = 0;
-                        peep.scaleX = -1;
-                    }
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
 
-                    peep.x = startX;
-                    peep.y = startY;
-                    peep.anchorY = startY;
+        const projectItems = document.querySelectorAll('.project-item');
+        let isMobile = window.innerWidth <= 768;
+        let hasTriggered = false;
+        let hoverListeners = [];
+        let scrollTriggerInstance = null;
 
-                    return { startX, startY, endX };
-                };
+        function cleanupMobile() {
+            // Kill ScrollTrigger
+            if (scrollTriggerInstance) {
+                scrollTriggerInstance.kill();
+                scrollTriggerInstance = null;
+            }
+            // Kill all GSAP animations
+            gsap.killTweensOf('*');
+        }
 
-                const normalWalk = ({ peep, props }) => {
-                    const { startX, startY, endX } = props;
-                    const xDuration = 10;
-                    const yDuration = 0.25;
+        function cleanupDesktop() {
+            // Remove all hover listeners
+            hoverListeners.forEach(({ item, enter, leave }) => {
+                item.removeEventListener('mouseenter', enter);
+                item.removeEventListener('mouseleave', leave);
+            });
+            hoverListeners = [];
+            // Kill all GSAP animations
+            gsap.killTweensOf('*');
+        }
 
-                    const tl = gsap.timeline();
-                    tl.timeScale(randomRange(0.5, 1.5));
-                    tl.to(peep, { duration: xDuration, x: endX, ease: "none" }, 0);
-                    tl.to(peep, { duration: yDuration, repeat: xDuration / yDuration, yoyo: true, y: startY - 10 }, 0);
+        function initMobile() {
+            cleanupDesktop();
+            hasTriggered = false;
 
-                    return tl;
-                };
+            // Create ScrollTrigger for the entire projects list
+            scrollTriggerInstance = ScrollTrigger.create({
+                trigger: '.projects-list',
+                start: 'top 80%',
+                once: true,
+                onEnter: () => {
+                    if (hasTriggered) return;
+                    hasTriggered = true;
 
-                const walks = [normalWalk];
+                    // Trigger hover effect on each project sequentially
+                    projectItems.forEach((item, index) => {
+                        const textContent = item.querySelector('.text-content');
+                        const imagesRow = item.querySelector('.images-row');
+                        const images = item.querySelectorAll('.hover-image');
 
-                // FACTORY FUNCTIONS
-                const createPeep = ({ image, rect }) => {
-                    const peep = {
-                        image,
-                        rect: [],
-                        width: 0,
-                        height: 0,
-                        drawArgs: [],
-                        x: 0,
-                        y: 0,
-                        anchorY: 0,
-                        scaleX: 1,
-                        walk: null,
-                        setRect: (rect) => {
-                            peep.rect = rect;
-                            peep.width = rect[2];
-                            peep.height = rect[3];
-                            peep.drawArgs = [peep.image, ...rect, 0, 0, peep.width, peep.height];
-                        },
-                        render: (ctx) => {
-                            ctx.save();
-                            ctx.translate(peep.x, peep.y);
-                            ctx.scale(peep.scaleX, 1);
-                            ctx.drawImage(peep.image, peep.rect[0], peep.rect[1], peep.rect[2], peep.rect[3], 0, 0, peep.width, peep.height);
-                            ctx.restore();
-                        },
-                    };
+                        // Calculate delay - all must finish in 1.1s
+                        const baseDelay = index * 0.122;
 
-                    peep.setRect(rect);
-                    return peep;
-                };
+                        const tl = gsap.timeline({ delay: baseDelay });
 
-                // MAIN
-                const img = document.createElement("img");
-                const stage = { width: 0, height: 0 };
-                const allPeeps = [];
-                const availablePeeps = [];
-                const crowd = [];
+                        // Text flip out - ULTRA FAST
+                        tl.to(textContent, {
+                            rotationX: -90,
+                            opacity: 0,
+                            duration: 0.08,
+                            ease: 'power1.in'
+                        }, 0);
 
-                const createPeeps = () => {
-                    const { rows, cols } = config;
-                    const { naturalWidth: width, naturalHeight: height } = img;
-                    const total = rows * cols;
-                    const rectWidth = width / rows;
-                    const rectHeight = height / cols;
+                        // Show images row - INSTANT
+                        tl.to(imagesRow, {
+                            opacity: 1,
+                            duration: 0.05,
+                        }, 0.06);
 
-                    for (let i = 0; i < total; i++) {
-                        allPeeps.push(
-                            createPeep({
-                                image: img,
-                                rect: [
-                                    (i % rows) * rectWidth,
-                                    ((i / rows) | 0) * rectHeight,
-                                    rectWidth,
-                                    rectHeight,
-                                ],
-                            })
-                        );
-                    }
-                };
+                        // Animate images in - LIGHTNING FAST
+                        images.forEach((img, i) => {
+                            tl.to(img, {
+                                scale: 1,
+                                rotateY: 0,
+                                duration: 0.1,
+                                ease: 'power1.out'
+                            }, 0.08 + (i * 0.01));
+                        });
 
-                const initCrowd = () => {
-                    while (availablePeeps.length) {
-                        addPeepToCrowd().walk.progress(Math.random());
-                    }
-                };
+                        // Tiny hold
+                        tl.to({}, { duration: 0.05 });
 
-                const addPeepToCrowd = () => {
-                    const peep = removeRandomFromArray(availablePeeps);
-                    const walk = getRandomFromArray(walks)({
-                        peep,
-                        props: resetPeep({ peep, stage }),
-                    }).eventCallback("onComplete", () => {
-                        removePeepFromCrowd(peep);
-                        addPeepToCrowd();
+                        // Images out - INSTANT
+                        tl.to(images, {
+                            scale: 0.95,
+                            rotateY: -90,
+                            duration: 0.08,
+                            ease: 'power1.in',
+                            stagger: 0.008
+                        });
+
+                        // Text back in - INSTANT
+                        tl.to(textContent, {
+                            rotationX: 0,
+                            opacity: 1,
+                            duration: 0.08,
+                            ease: 'power1.out'
+                        }, '-=0.03');
                     });
-
-                    peep.walk = walk;
-                    crowd.push(peep);
-                    crowd.sort((a, b) => a.anchorY - b.anchorY);
-
-                    return peep;
-                };
-
-                const removePeepFromCrowd = (peep) => {
-                    removeItemFromArray(crowd, peep);
-                    availablePeeps.push(peep);
-                };
-
-                const render = () => {
-                    if (!canvas) return;
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    ctx.save();
-                    ctx.scale(devicePixelRatio, devicePixelRatio);
-
-                    crowd.forEach((peep) => {
-                        peep.render(ctx);
-                    });
-
-                    ctx.restore();
-                };
-
-                const resize = () => {
-                    if (!canvas) return;
-                    stage.width = canvas.clientWidth;
-                    stage.height = canvas.clientHeight;
-                    canvas.width = stage.width * devicePixelRatio;
-                    canvas.height = stage.height * devicePixelRatio;
-
-                    crowd.forEach((peep) => {
-                        peep.walk.kill();
-                    });
-
-                    crowd.length = 0;
-                    availablePeeps.length = 0;
-                    availablePeeps.push(...allPeeps);
-
-                    initCrowd();
-                };
-
-                const init = () => {
-                    createPeeps();
-                    resize();
-                    gsap.ticker.add(render);
-                };
-
-                img.onload = init;
-                img.src = config.src;
-
-                const handleResize = () => resize();
-                window.addEventListener("resize", handleResize);
-
-                return () => {
-                    window.removeEventListener("resize", handleResize);
-                    gsap.ticker.remove(render);
-                    crowd.forEach((peep) => {
-                        if (peep.walk) peep.walk.kill();
-                    });
-                };
-            }, [src, rows, cols]);
-
-            return React.createElement("canvas", {
-                ref: canvasRef,
-                style: {
-                    position: 'absolute',
-                    bottom: 0,
-                    height: '90vh',
-                    width: '100%'
                 }
             });
-        };
+        }
 
-        const Skiper39 = () => {
-            return React.createElement("div", {
-                style: {
-                    position: 'relative',
-                    height: '100vh',
-                    width: '100%',
-                    background: 'white',
-                    color: 'black'
+        function initDesktop() {
+            cleanupMobile();
+
+            // Desktop: Hover effect
+            projectItems.forEach(item => {
+                const textContent = item.querySelector('.text-content');
+                const imagesRow = item.querySelector('.images-row');
+                const images = item.querySelectorAll('.hover-image');
+                
+                let enterTimeline = null;
+                let leaveTimeline = null;
+
+                const handleMouseEnter = () => {
+                    if (leaveTimeline) {
+                        leaveTimeline.kill();
+                    }
+                    if (enterTimeline) {
+                        enterTimeline.kill();
+                    }
+
+                    enterTimeline = gsap.timeline();
+
+                    enterTimeline.to(textContent, {
+                        rotationX: -90,
+                        opacity: 0,
+                        duration: 0.15,
+                        ease: 'power1.in'
+                    }, 0);
+
+                    enterTimeline.to(imagesRow, {
+                        opacity: 1,
+                        duration: 0.1,
+                    }, 0.1);
+
+                    images.forEach((img, i) => {
+                        enterTimeline.to(img, {
+                            scale: 1,
+                            rotateY: 0,
+                            duration: 0.2,
+                            ease: 'power1.out'
+                        }, 0.12 + (i * 0.02));
+                    });
+                };
+
+                const handleMouseLeave = () => {
+                    if (enterTimeline) {
+                        enterTimeline.kill();
+                    }
+                    if (leaveTimeline) {
+                        leaveTimeline.kill();
+                    }
+
+                    leaveTimeline = gsap.timeline();
+
+                    leaveTimeline.to(images, {
+                        scale: 0.95,
+                        rotateY: -90,
+                        duration: 0.15,
+                        ease: 'power1.in',
+                        stagger: 0.015
+                    }, 0);
+
+                    leaveTimeline.to(imagesRow, {
+                        opacity: 0,
+                        duration: 0.1,
+                    }, 0.08);
+
+                    leaveTimeline.to(textContent, {
+                        rotationX: 0,
+                        opacity: 1,
+                        duration: 0.15,
+                        ease: 'power1.out'
+                    }, 0.1);
+                };
+
+                item.addEventListener('mouseenter', handleMouseEnter);
+                item.addEventListener('mouseleave', handleMouseLeave);
+
+                // Store listeners for cleanup
+                hoverListeners.push({
+                    item,
+                    enter: handleMouseEnter,
+                    leave: handleMouseLeave
+                });
+            });
+        }
+
+        function init() {
+            isMobile = window.innerWidth <= 768;
+            
+            if (isMobile) {
+                initMobile();
+            } else {
+                initDesktop();
+            }
+        }
+
+        // Initial setup
+        init();
+
+        // Reinitialize on resize
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                const newIsMobile = window.innerWidth <= 768;
+                
+                // Only reinit if mode changed
+                if (newIsMobile !== isMobile) {
+                    init();
                 }
-            },
-                React.createElement("div", {
-                    style: {
-                        position: 'absolute',
-                        top: '5.5rem',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        display: 'grid',
-                        alignContent: 'start',
-                        justifyItems: 'center',
-                        gap: '1.5rem',
-                        textAlign: 'center',
-                        color: 'black'
-                    }
-                },
-                    React.createElement("span", {
-                        style: {
-                            position: 'relative',
-                            maxWidth: '12ch',
-                            fontSize: '0.75rem',
-                            textTransform: 'uppercase',
-                            lineHeight: '1.3',
-                            opacity: 0.4,
-                            letterSpacing: '0.05em'
-                        }
-                    }, "Crowd Canvas")
-                ),
-                React.createElement("div", {
-                    style: {
-                        position: 'absolute',
-                        bottom: 0,
-                        height: '100%',
-                        width: '100vw'
-                    }
-                },
-                    React.createElement(CrowdCanvas, {
-                        src: "/images/peeps/all-peeps.png",
-                        rows: 15,
-                        cols: 7
-                    })
-                )
-            );
-        };
-
-        // Render the component
-        const root = ReactDOM.createRoot(document.getElementById('crowd-canvas-root'));
-        root.render(React.createElement(Skiper39));
+            }, 250);
+        });
     </script>
 </body>
 </html>

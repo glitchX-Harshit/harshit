@@ -4,6 +4,7 @@ import { ScrollTrigger } from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/ScrollTr
 
 gsap.registerPlugin(CustomEase, ScrollTrigger);
 CustomEase.create("hop", "0.85, 0, 0.15, 1");
+CustomEase.create("luxury", "0.16, 1, 0.3, 1");
 
 const counterProgress = document.querySelector(".counter h1");
 const counter = { value: 0 };
@@ -105,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Initialize Lenis with increased sensitivity
     const lenis = new Lenis({
-        duration: 5,
+        duration: 2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
 
@@ -113,13 +114,54 @@ document.addEventListener("DOMContentLoaded", () => {
     lenis.on('scroll', ScrollTrigger.update);
 
     gsap.ticker.add((time) => {
-        lenis.raf(time * 1000);
+        lenis.raf(time * 350);
     });
 
     gsap.ticker.lagSmoothing(0);
+
+    // Minimal luxury approach heading animation
+    const approachHeading = document.querySelector(".approach .heading h1");
+    
+    if (approachHeading) {
+        // Split into lines and words
+        const text = approachHeading.innerText;
+        const words = text.split(" ");
+        
+        approachHeading.innerHTML = words.map(word => {
+            return `<span class="approach-word"><span class="approach-word-inner">${word}</span></span>`;
+        }).join(" ");
+
+        const wordWrappers = approachHeading.querySelectorAll(".approach-word");
+        
+        // Set initial state - simple mask reveal
+        gsap.set(wordWrappers, {
+            overflow: "hidden",
+            display: "inline-block",
+            verticalAlign: "top"
+        });
+        
+        gsap.set(".approach-word-inner", {
+            yPercent: 100,
+            opacity: 0
+        });
+
+        // Minimal, smooth reveal
+        gsap.to(".approach-word-inner", {
+            yPercent: 0,
+            opacity: 1,
+            duration: 1.8,
+            stagger: 0.015,
+            ease: "luxury",
+            scrollTrigger: {
+                trigger: ".approach .heading",
+                start: "top 75%",
+                end: "bottom 60%",
+                toggleActions: "play none none none"
+            }
+        });
+    }
 });
 
-// MARQUEE COMPONENT - FIXED VERSION
 (function () {
     const component = document.querySelector('.marquee-component');
 
@@ -160,7 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        // Marquee animation - FIXED SYNCHRONIZATION
+        // Marquee animation
         const m1 = component.querySelector('[data-marquee="1"]');
         const m2 = component.querySelector('[data-marquee="2"]');
 
@@ -178,17 +220,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 m1Pos += speed * direction;
                 m2Pos -= speed * direction;
 
-                // Fixed synchronization logic using modulo
                 if (Math.abs(m1Pos) >= m1Width) {
-                    m1Pos = m1Pos % m1Width;
+                    m1Pos = 0;
                 } else if (m1Pos > 0) {
-                    m1Pos = -(m1Width - (m1Pos % m1Width));
+                    m1Pos = -m1Width;
                 }
 
                 if (Math.abs(m2Pos) >= m2Width) {
-                    m2Pos = m2Pos % m2Width;
+                    m2Pos = 0;
                 } else if (m2Pos > 0) {
-                    m2Pos = -(m2Width - (m2Pos % m2Width));
+                    m2Pos = -m2Width;
                 }
 
                 gsap.set(m1, { x: m1Pos });
@@ -213,7 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // VIDEO SCALE ANIMATION
+    // Video scale animation
     const mainVideo = document.querySelector(".main-video");
 
     if (mainVideo) {
